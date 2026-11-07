@@ -1,5 +1,45 @@
 # Object Oriented Programming (OOP) Part 2 - Cash Register Lab
 
+## Completed implementation
+
+`lib/cash_register.py` defines a simple cash register with a validated integer
+discount from 0 through 100, a running total, a list of item names, and a list
+of transaction dictionaries. Quantity defaults to one. Voiding removes the
+most recent purchase, including every copy of that item.
+
+### Run the tests
+
+This is a Python project; there is no package.json for the npm setup instruction.
+Install the dependencies with `pipenv install`, then run
+`pipenv run pytest -v`. With Python 3.14 and the pinned pytest 7.1.3, use
+`pipenv run pytest --assert=plain -v` to avoid incompatible assertion rewriting.
+All 14 supplied tests pass with that option.
+
+### Example
+
+```python
+from lib.cash_register import CashRegister
+
+register = CashRegister(20)
+register.add_item("book", 5, 3)
+print(register.total)  # 15
+register.void_last_transaction()
+print(register.total)  # 0
+register.add_item("laptop", 1000)
+register.apply_discount()  # After the discount, the total comes to $800.
+```
+
+### Assignment clarification
+
+The Canvas assignment and original instructions repeat transaction-removal
+steps under `apply_discount`. The supplied tests expect a discount to reduce
+the purchase total. This solution therefore keeps purchases when applying a
+discount and removes them only through `void_last_transaction`. Apply the
+discount after finishing additions and voids, as a checkout step.
+
+The current Canvas assignment asks for the GitHub repository URL as the
+submission; its instructions differ from the older CodeGrade directions below.
+
 Now that we’ve discussed more about object oriented design philosophies and techniques like decorators we will be looking at building more complex objects. In this case we will be building a cash register object to simulate different functions of a cash register for an e-commerce site. 
 
 ## Tools & Resources
